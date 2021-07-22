@@ -1,2 +1,49 @@
-<p>admin works!</p>
-<router-outlet></router-outlet>
+<ng-container>
+    <!--toolbar-->
+    <mat-toolbar color="primary" class="admin-toolbar">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span class="app-title">&nbsp; {{title}}</span>
+            <div class="uk-width-expand"></div>
+            <small>Admin</small>
+            <button mat-button (click)="logout()">Logout</button>
+    
+    </mat-toolbar>
+    <!--end toolbar-->
+    
+    <mat-sidenav-container class="admin-container">
+        <mat-sidenav 
+            #sidenav 
+            mode="side" 
+            [position]="'start'" 
+            [opened]="true"
+            class="sidenav-left"
+            [fixedInViewport]="true" 
+            [fixedTopGap]="65"
+            [fixedBottomGap]="0">
+        
+        <mat-nav-list>
+            <mat-list-item *ngFor="let item of navList" routerLink={{item.link}}>
+                <mat-icon matListIcon>{{item.icon}}</mat-icon>
+                <h3 matLine>{{item.title}}</h3>
+            </mat-list-item>
+        </mat-nav-list>
+      </mat-sidenav>
+    
+        <mat-sidenav 
+            #sidenav mode="side"
+            [position]="'end'" 
+            class="example-sidenav"
+            [fixedInViewport]="true" 
+            [fixedTopGap]="60"
+            [fixedBottomGap]="0">
+        </mat-sidenav>
+        <!--sidenav content-->
+        <mat-sidenav-content style="padding: 20px; background-color: #EFEFEF;">
+        <!--halaman-halaman tampil disini-->
+            <router-outlet></router-outlet>
+        </mat-sidenav-content>
+    <!--end sidenav content-->
+    </mat-sidenav-container>   
+</ng-container>

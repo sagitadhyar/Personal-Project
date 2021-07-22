@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Constants } from 'src/app/common/constants';
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +7,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+  title = Constants.siteTitle
+
+  navList = [
+    { link: '/admin/dashboard', icon: 'dashboard', title: 'Dashboard' },
+    { link: '/admin/barang', icon: 'inbox', title: 'Barang' },
+    { link: '/admin/pegawai', icon: 'group', title: 'Pegawai' },
+    { link: '/admin/supplier', icon: 'shopping_cart', title: 'Supplier' },
+    { link: '/admin/permintaan', icon: 'save_alt', title: 'Permintaan' },
+    { link: '/admin/pembelian', icon: 'payments', title: 'Pembelian' },
+    { link: '/admin/pengiriman', icon: 'send', title: 'Pengiriman' }
+  ]
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  logout()
+  {
+    let conf = confirm('Keluar Aplikasi?');
+    if(conf)
+    {
+      localStorage.removeItem('appToken');
+      window.location.reload();
+    }
   }
 
 }
