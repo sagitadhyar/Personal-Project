@@ -16,6 +16,15 @@ const routes: Routes = [
   {
     path: 'forgot-password',
     component: ForgotPasswordComponent
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then(mod => mod.AdminModule)
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: '/login'
   }
 ];
 
