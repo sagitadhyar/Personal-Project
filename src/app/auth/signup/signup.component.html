@@ -1,1 +1,67 @@
-<p>signup works!</p>
+<div class="uk-flex uk-flex-middle uk-flex-center uk-height-viewport" style="background-color: #E3DFDF;">  
+    <mat-card class="uk-width-1-3@m uk-width-1-2@s uk-padding-remove">
+        <mat-card-header class="uk-flex uk-flex-center uk-padding-small uk-padding-remove-horizontal uk-padding-remove-bottom">
+            <h2 class="app-title">{{title}}</h2>
+        </mat-card-header>
+        <mat-card-content class="uk-padding-small">
+            <form class="login-form uk-flex uk-flex-column uk-margin-top uk-padding uk-padding-remove-vertical">
+                
+                
+                <!-- Input Username -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Username</mat-label>
+                    <input type="text" matInput >
+                    <mat-hint></mat-hint>
+                    <mat-icon matSuffix>alternate_email</mat-icon>
+                </mat-form-field>
+
+                
+                <!-- Input NIP -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Nomor Induk Pekerja</mat-label>
+                    <input type="text" matInput >
+                    <mat-hint></mat-hint>
+                    <mat-icon matSuffix>account_box</mat-icon>
+                </mat-form-field>
+                
+                <!-- Input Email -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                        placeholder="Ex. sagita1900016189@webmail.uad.ac.id">
+                    <mat-hint></mat-hint>
+                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                    Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                    Email <strong>harus diisi</strong>
+                    </mat-error>
+                    <mat-icon matSuffix>email</mat-icon>
+                </mat-form-field>
+                
+                <!-- Input Password -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput >
+                    <mat-hint></mat-hint>
+                    <mat-icon matSuffix>lock</mat-icon>
+                </mat-form-field>
+                
+                <!-- Input Confirm Password -->
+                <mat-form-field appearance="fill">
+                    <mat-label>Konfirmasi Password</mat-label>
+                    <input type="password" matInput >
+                    <mat-hint></mat-hint>
+                    <mat-icon matSuffix>lock</mat-icon>
+                </mat-form-field>
+                
+                <button mat-flat-button color="primary" class="uk-flex uk-flex-right">Sign Up</button>
+
+                <div class="uk-flex uk-flex-center uk-margin-top uk-inline">
+                    <p>Sudah punya akun?&nbsp;</p>
+                    <p><a routerLink="/login"><u>Login</u></a></p>
+                </div>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
