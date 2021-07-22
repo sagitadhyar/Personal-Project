@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import './uikit.css';
+@import url(//db.onlinewebfonts.com/c/fc3b8143000f0e6f34aeb41dd1d410ba?family=OCR-B+10+BT);
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -4,6 +4,7 @@ import { AdminComponent } from './admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BarangComponent } from './barang/barang.component';
+import { MaterialDesign } from '../material/material';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
+    MaterialDesign,
     RouterModule.forChild(routes)
   ]
 })
