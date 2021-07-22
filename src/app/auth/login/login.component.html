@@ -9,7 +9,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Email</mat-label>
                     <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
-                        placeholder="Ex. sagita1900016189@webmail.uad.ac.id">
+                        placeholder="Ex. sagita@uad.ac.id">
                     <mat-hint>Masukan email anda</mat-hint>
                     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
                     Please enter a valid email address
