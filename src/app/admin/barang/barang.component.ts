@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog-confirm.component';
 import { DialogContentComponent } from 'src/app/components/dialog-content/dialog-content.component';
 import { LocalStorageHelper } from 'src/app/utils/local-storage-helper';
 import { BarangDetailComponent } from './barang-detail/barang-detail.component';
@@ -102,13 +103,20 @@ export class BarangComponent implements AfterViewInit {
   }
 
   deleteData(row: Barang) {
-    if(confirm(`Hapus data dengan kode '${row.kode_barang}'?`))
-    {
-      const index = this.dataSource.data.indexOf(row)
-      this.dataSource.data.splice(index, 1)
-      this.dataSource._updateChangeSubscription()
-      LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
-    }
+    this.dialog.open(DialogConfirmComponent, {
+      width: '400px',
+      data: {
+        title: "Anda yakin?",
+        text: `hapus data dengan kode '${row.kode_barang}'`
+      }
+    }).afterClosed().subscribe(ok => {
+      if(ok) {
+        const index = this.dataSource.data.indexOf(row)
+        this.dataSource.data.splice(index, 1)
+        this.dataSource._updateChangeSubscription()
+        LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
+      }
+    });
   }
 }
 

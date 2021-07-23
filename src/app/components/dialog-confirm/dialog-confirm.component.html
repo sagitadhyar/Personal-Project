@@ -1,0 +1,9 @@
+<div class="uk-flex uk-flex-column">
+    <h2 mat-dialog-title *ngIf="dialogTitle">{{dialogTitle}}</h2>
+    <p *ngIf="dialogText">{{dialogText}}</p>
+      
+    <div mat-dialog-actions class="uk-flex uk-flex-right">
+        <button mat-flat-button [mat-dialog-close]="0" color="accent">Batal</button>
+        <button mat-flat-button [mat-dialog-close]="1" color="accent">Ok</button>
+    </div>
+</div>

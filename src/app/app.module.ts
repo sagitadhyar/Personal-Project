@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialDesign } from './material/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogContentComponent } from './components/dialog-content/dialog-content.component';
+import { DialogConfirmComponent } from './components/dialog-confirm/dialog-confirm.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DialogContentComponent } from './components/dialog-content/dialog-conte
     LoginComponent,
     SignupComponent,
     ForgotPasswordComponent,
-    DialogContentComponent
+    DialogContentComponent,
+    DialogConfirmComponent
   ],
   imports: [
     BrowserModule,
