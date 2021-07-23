@@ -1,10 +1,12 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { LocalStorageHelper } from 'src/app/utils/local-storage-helper';
+import { BarangDetailComponent } from './barang-detail/barang-detail.component';
 
 export interface Barang {
-  id: string;
   kode_barang: string;
   nama_barang: string;
   satuan: string;
@@ -30,19 +32,21 @@ const NAMES: string[] = [
   styleUrls: ['./barang.component.scss']
 })
 export class BarangComponent implements AfterViewInit {
-  displayedColumns: string[] = ['id', 'kode_barang', 'nama_barang', 'satuan', 'kategori', 'stok', 'actions'];
+  localStorageItemName: string = 'barang'
+  displayedColumns: string[] = ['index', 'kode_barang', 'nama_barang', 'satuan', 'kategori', 'stok', 'actions'];
   dataSource: MatTableDataSource<Barang>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
+  constructor(public dialog:MatDialog) {
+
+    // // Create 100 users
+    // const users = Array.from({length: 100}, (_, k) => createNewData(k + 1));
+    const data = LocalStorageHelper.getObject(this.localStorageItemName)
 
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
-    console.log(users)
+    this.dataSource = new MatTableDataSource(data ? data : []);
   }
 
   ngAfterViewInit() {
@@ -60,36 +64,55 @@ export class BarangComponent implements AfterViewInit {
   }
 
   addData() {
-    this.dataSource.data.push(createNewUser(this.dataSource.data.length +1));
-    this.dataSource._updateChangeSubscription();
+    this.dialog.open(BarangDetailComponent, {
+      width: '400px'
+    }).afterClosed().subscribe(result => {
+      if(result) {
+        this.dataSource.data.unshift(result)
+        this.dataSource._updateChangeSubscription();
+        LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
+      }
+    });
+    //TODO: Save to localstorage
   }
 
-  editData(row: Barang) {
-    console.log(row)
+  editData(row: any) {
+    this.dialog.open(BarangDetailComponent, {
+      width: '400px',
+      data: row
+    }).afterClosed().subscribe(result => {
+      if(result) {
+        for(var k in result) row[k] = result[k];
+        LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
+      }
+    });
   }
 
   deleteData(row: Barang) {
-    const index = this.dataSource.data.indexOf(row)
-    this.dataSource.data.splice(index, 1)
-    this.dataSource._updateChangeSubscription()
+    if(confirm(`Hapus data dengan kode '${row.kode_barang}'?`))
+    {
+      const index = this.dataSource.data.indexOf(row)
+      this.dataSource.data.splice(index, 1)
+      this.dataSource._updateChangeSubscription()
+      LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
+    }
   }
 }
 
-/** Builds and returns a new Barang. */
-function createNewUser(id: number): Barang {
-  const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
-    NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
+// /** Builds and returns a new Barang. */
+// function createNewData(id: number): Barang {
+//   const name = NAMES[Math.round(Math.random() * (NAMES.length - 1))] + ' ' +
+//     NAMES[Math.round(Math.random() * (NAMES.length - 1))].charAt(0) + '.';
 
-  let str = "" + id
-  let pad = "000"
-  var kode_barang = pad.substring(0, pad.length - str.length) + str
+//   let str = "" + id
+//   let pad = "000"
+//   var kode_barang = pad.substring(0, pad.length - str.length) + str
 
-  return {
-    id: id.toString(),
-    kode_barang: kode_barang,
-    nama_barang: name,
-    satuan: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-    kategori: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
-    stok: Math.round(Math.random() * 100),
-  };
-}
+//   return {
+//     kode_barang: kode_barang,
+//     nama_barang: name,
+//     satuan: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+//     kategori: FRUITS[Math.round(Math.random() * (FRUITS.length - 1))],
+//     stok: Math.round(Math.random() * 100),
+//   };
+// }

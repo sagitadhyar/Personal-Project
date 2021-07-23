@@ -5,6 +5,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BarangComponent } from './barang/barang.component';
 import { MaterialDesign } from '../material/material';
+import { BarangDetailComponent } from './barang/barang-detail/barang-detail.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -32,11 +34,14 @@ const routes: Routes = [
   declarations: [
     AdminComponent,
     DashboardComponent,
-    BarangComponent
+    BarangComponent,
+    BarangDetailComponent
   ],
   imports: [
     CommonModule,
     MaterialDesign,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ]
 })

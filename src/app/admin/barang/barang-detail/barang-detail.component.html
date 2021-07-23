@@ -1,0 +1,48 @@
+<div class="uk-flex uk-flex-column">
+    <h1 mat-dialog-title>{{dialogTitle}}</h1>
+
+    <form>
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Kode Barang</mat-label>
+                <input matInput [(ngModel)]="barang.kode_barang" name="kode_barang" required>
+                <mat-error *ngIf="!barang.kode_barang">Harus diisi</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Nama Barang</mat-label>
+                <input matInput [(ngModel)]="barang.nama_barang" name="nama_barang" required>
+                <mat-error *ngIf="!barang.nama_barang">Harus diisi</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Satuan</mat-label>
+                <input matInput [(ngModel)]="barang.satuan" name="satuan">
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Kategori</mat-label>
+                <input matInput [(ngModel)]="barang.kategori" name="kategori">
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Stok</mat-label>
+                <input matInput type="number" [(ngModel)]="barang.stok" name="stok" required>
+                <mat-error *ngIf="!barang.stok">Harus diisi</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions class="uk-flex uk-flex-right">
+            <button mat-button (click)="onCancel()">Batal</button>
+            <button mat-flat-button [disabled]="!barang.kode_barang || !barang.nama_barang || !barang.stok" [mat-dialog-close]="barang" color="accent">{{dialogOkButton}}</button>
+        </div>
+    </form>
+</div>

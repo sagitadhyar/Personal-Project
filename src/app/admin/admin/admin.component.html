@@ -7,7 +7,7 @@
             <span class="app-title">&nbsp; {{title}}</span>
             <div class="uk-width-expand"></div>
             <small>Admin</small>
-            <button mat-button (click)="logout()">Logout</button>
+            <!-- <button mat-button (click)="logout()">Logout</button> -->
     
     </mat-toolbar>
     <!--end toolbar-->
@@ -15,30 +15,38 @@
     <mat-sidenav-container class="admin-container">
         <mat-sidenav 
             #sidenav 
-            mode="side" 
             [position]="'start'" 
-            [opened]="true"
+            [opened]="screenWidth > 840" 
+            [mode]="screenWidth > 840 ? 'side' : 'over'"
+            [fixedTopGap]="screenWidth > 840 ? 65 : 56"
             class="sidenav-left"
             [fixedInViewport]="true" 
-            [fixedTopGap]="65"
             [fixedBottomGap]="0">
         
-        <mat-nav-list>
-            <mat-list-item *ngFor="let item of navList" routerLink={{item.link}}>
-                <mat-icon matListIcon>{{item.icon}}</mat-icon>
-                <h3 matLine>{{item.title}}</h3>
-            </mat-list-item>
-        </mat-nav-list>
-      </mat-sidenav>
+            <mat-nav-list>
+                <mat-list-item *ngFor="let item of navList" (click)="sidenav.mode === 'over' && sidenav.toggle()" routerLink={{item.link}}>
+                    <mat-icon matListIcon>{{item.icon}}</mat-icon>
+                    <h3 matLine>{{item.title}}</h3>
+                </mat-list-item>
+                <mat-nav-list>
+                    <mat-list-item (click)="doLogout()">
+                        <mat-icon matListIcon>logout</mat-icon>
+                        <h3 matLine>Logout</h3>
+                    </mat-list-item>
+                </mat-nav-list>
+            </mat-nav-list>
+
+        </mat-sidenav>
     
-        <mat-sidenav 
+        <!-- <mat-sidenav 
             #sidenav mode="side"
+            style="color: aqua;"
             [position]="'end'" 
             class="example-sidenav"
             [fixedInViewport]="true" 
             [fixedTopGap]="60"
             [fixedBottomGap]="0">
-        </mat-sidenav>
+        </mat-sidenav> -->
         <!--sidenav content-->
         <mat-sidenav-content style="padding: 20px; background-color: #EFEFEF;">
         <!--halaman-halaman tampil disini-->

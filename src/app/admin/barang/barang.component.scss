@@ -6,6 +6,21 @@ table {
     font-size: 14px;
 }
 
-td, th {
-    width: 10%;
+.mat-row:hover {
+    background-color: #FBFBFB;
+}
+
+h1 {
+    font-family: 'OCR-B 10 BT';
+}
+
+.mat-header-cell:first-child,.mat-cell:first-child{
+    flex: 0 0 5%;
+    min-width: 25px;
+    max-width: 60px;
+}
+
+.mat-header-cell:last-child,.mat-cell:last-child{
+    flex: 0 0 5%;
+    min-width: 80px;
 }

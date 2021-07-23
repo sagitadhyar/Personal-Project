@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Constants } from 'src/app/common/constants';
+import { Constants } from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-admin',
@@ -8,6 +8,7 @@ import { Constants } from 'src/app/common/constants';
 })
 export class AdminComponent implements OnInit {
   title = Constants.siteTitle
+  screenWidth: number
 
   navList = [
     { link: '/admin/dashboard', icon: 'dashboard', title: 'Dashboard' },
@@ -19,12 +20,17 @@ export class AdminComponent implements OnInit {
     { link: '/admin/pengiriman', icon: 'send', title: 'Pengiriman' }
   ]
 
-  constructor() { }
+  constructor() {
+    this.screenWidth = window.innerWidth;
+    window.onresize = () => {
+      this.screenWidth = window.innerWidth;
+    };
+   }
 
   ngOnInit(): void {
   }
 
-  logout()
+  doLogout()
   {
     let conf = confirm('Keluar Aplikasi?');
     if(conf)
