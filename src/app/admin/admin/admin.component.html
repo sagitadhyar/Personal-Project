@@ -1,4 +1,4 @@
-<ng-container>
+<ng-container (window:resize)="onResize($event)">
     <!--toolbar-->
     <mat-toolbar color="primary" class="admin-toolbar">
             <button mat-icon-button (click)="sidenav.toggle()">

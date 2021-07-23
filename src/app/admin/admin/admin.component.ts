@@ -10,22 +10,17 @@ export class AdminComponent implements OnInit {
   title = Constants.siteTitle
   screenWidth: number
 
-  navList = [
-    { link: '/admin/dashboard', icon: 'dashboard', title: 'Dashboard' },
-    { link: '/admin/barang', icon: 'inbox', title: 'Barang' },
-    { link: '/admin/pegawai', icon: 'group', title: 'Pegawai' },
-    { link: '/admin/supplier', icon: 'shopping_cart', title: 'Supplier' },
-    { link: '/admin/permintaan', icon: 'save_alt', title: 'Permintaan' },
-    { link: '/admin/pembelian', icon: 'payments', title: 'Pembelian' },
-    { link: '/admin/pengiriman', icon: 'send', title: 'Pengiriman' }
-  ]
-
+  navList = Constants.adminMenus
   constructor() {
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
       this.screenWidth = window.innerWidth;
     };
-   }
+  }
+
+  onResize(event: any) {
+    this.screenWidth = event.target.innerWidth;
+  }
 
   ngOnInit(): void {
   }

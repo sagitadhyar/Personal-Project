@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Constants } from 'src/app/utils/constants';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  adminMenus = Constants.adminMenus
+  screenWidth: number
 
-  constructor() { }
+  constructor() { 
+    this.screenWidth = window.innerWidth;
+    window.onresize = () => {
+      this.screenWidth = window.innerWidth;
+    };
+  }
 
+  onResize(event: any) {
+    this.screenWidth = event.target.innerWidth;
+  }
+  
   ngOnInit(): void {
   }
 

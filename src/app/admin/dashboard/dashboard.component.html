@@ -1,1 +1,12 @@
-<p>dashboard works!</p>
+<mat-grid-list [cols]="screenWidth > 1000 ? 4 : screenWidth > 800 ? 3 : 2" rowHeight="2:1" gutterSize="12" (window:resize)="onResize($event)">
+    <mat-grid-tile
+      *ngFor="let menu of adminMenus"
+      [colspan]="1"
+      [rowspan]="1">
+      <mat-card matRipple class="uk-width-1-1 uk-height-1-1" [style.background]="menu.color" routerLink="{{menu.link}}">
+          <div class="uk-flex uk-flex-right uk-flex-bottom uk-height-1-1">
+            <h2 class="uk-flex uk-flex-center"><mat-icon class="uk-margin-small-right">{{menu.icon}}</mat-icon><span>{{menu.title}}</span></h2>
+          </div>
+      </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
