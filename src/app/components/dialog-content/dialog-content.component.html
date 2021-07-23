@@ -1,0 +1,22 @@
+<div class="uk-flex uk-flex-column">
+    <h1 mat-dialog-title>{{dialogTitle}}</h1>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+        <!-- Position Column -->
+        <ng-container matColumnDef="key">
+            <td mat-cell *matCellDef="let element"> <b>{{element.key}} </b></td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="value">
+            <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+        </ng-container>
+      
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+      
+
+    <div mat-dialog-actions class="uk-flex uk-flex-right">
+        <button mat-flat-button [mat-dialog-close]="0" color="accent">Tutup</button>
+    </div>
+</div>

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { DialogContentComponent } from 'src/app/components/dialog-content/dialog-content.component';
 import { LocalStorageHelper } from 'src/app/utils/local-storage-helper';
 import { BarangDetailComponent } from './barang-detail/barang-detail.component';
 
@@ -63,6 +64,19 @@ export class BarangComponent implements AfterViewInit {
     }
   }
 
+  showDetail(row: Barang) {
+    this.dialog.open(DialogContentComponent, {
+      width: '400px',
+      data: [
+        { key: "Kode Barang", value: row.kode_barang },
+        { key: "Nama Barang", value: row.nama_barang },
+        { key: "Satuan", value: row.satuan },
+        { key: "Kategori", value: row.kategori },
+        { key: "Stok", value: row.stok.toString() },
+      ]
+    })
+  }
+
   addData() {
     this.dialog.open(BarangDetailComponent, {
       width: '400px'
@@ -73,7 +87,6 @@ export class BarangComponent implements AfterViewInit {
         LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
       }
     });
-    //TODO: Save to localstorage
   }
 
   editData(row: any) {

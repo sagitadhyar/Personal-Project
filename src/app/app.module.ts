@@ -9,13 +9,15 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialDesign } from './material/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DialogContentComponent } from './components/dialog-content/dialog-content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SignupComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    DialogContentComponent
   ],
   imports: [
     BrowserModule,
