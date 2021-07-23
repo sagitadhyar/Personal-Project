@@ -1,0 +1,78 @@
+<div class="uk-flex uk-flex-column">
+    <h1 mat-dialog-title>{{dialogTitle}}</h1>
+
+    <form>
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>NIP</mat-label>
+                <input matInput [(ngModel)]="item.nip" name="nip" required>
+                <mat-error *ngIf="!item.nip">Harus diisi</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Nama Pegawai</mat-label>
+                <input matInput [(ngModel)]="item.nama_pegawai" name="nama_pegawai" required>
+                <mat-error *ngIf="!item.nama_pegawai">Harus diisi</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Tempat Lahir</mat-label>
+                <input matInput [(ngModel)]="item.tempat_lahir" name="tempat_lahir" required>
+                <mat-error *ngIf="!item.tempat_lahir">Harus diisi</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Choose a date</mat-label>
+                <input matInput [(ngModel)]="item.tanggal_lahir" [matDatepicker]="picker" name="tanggal_lahir" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="!item.tanggal_lahir">Harus diisi</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Jenis Kelamin</mat-label>
+                <mat-select [(ngModel)]="item.jenis_kelamin" name="jenis_kelamin" required>
+                    <mat-option value="L">Laki-laki</mat-option>
+                    <mat-option value="P">Perempuan</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Alamat</mat-label>
+                <input matInput type="text" [(ngModel)]="item.alamat" name="alamat" required>
+                <mat-error *ngIf="!item.alamat">Harus diisi</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>Jabatan</mat-label>
+                <input matInput type="text" [(ngModel)]="item.jabatan" name="jabatan" required>
+                <mat-error *ngIf="!item.jabatan">Harus diisi</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-content class="uk-flex uk-flex-column">
+            <mat-form-field appearance="fill">
+                <mat-label>No HP</mat-label>
+                <input matInput type="tel" [(ngModel)]="item.no_handphone" name="no_handphone" ng-pattern="\+?([ -]?\d+)+|\(\d+\)([ -]\d+)" required>
+                <mat-error *ngIf="!item.no_handphone">Harus diisi</mat-error>
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-actions class="uk-flex uk-flex-right">
+            <button mat-button (click)="onCancel()">Batal</button>
+            <button mat-flat-button [disabled]="!item.nip || !item.nama_pegawai || !item.tempat_lahir || !item.tanggal_lahir || !item.jenis_kelamin || !item.alamat || !item.jabatan || !item.no_handphone" [mat-dialog-close]="item" color="accent">{{dialogOkButton}}</button>
+        </div>
+    </form>
+</div>

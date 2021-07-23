@@ -20,7 +20,6 @@ export class DialogContentComponent implements OnInit {
     public dialogRef:MatDialogRef<DialogContentComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { 
-    console.log(data)
     this.dataSource = data
   }
 

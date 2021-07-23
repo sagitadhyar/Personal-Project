@@ -7,6 +7,9 @@ import { BarangComponent } from './barang/barang.component';
 import { MaterialDesign } from '../material/material';
 import { BarangDetailComponent } from './barang/barang-detail/barang-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PegawaiComponent } from './pegawai/pegawai.component';
+import { PegawaiDetailComponent } from './pegawai/pegawai-detail/pegawai-detail.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const routes: Routes = [
   {
@@ -22,6 +25,10 @@ const routes: Routes = [
         component: BarangComponent
       },
       {
+        path: 'pegawai',
+        component: PegawaiComponent
+      },
+      {
         path:'',
         pathMatch:'full',
         redirectTo:'/admin/dashboard'
@@ -35,13 +42,16 @@ const routes: Routes = [
     AdminComponent,
     DashboardComponent,
     BarangComponent,
-    BarangDetailComponent
+    BarangDetailComponent,
+    PegawaiComponent,
+    PegawaiDetailComponent
   ],
   imports: [
     CommonModule,
     MaterialDesign,
     FormsModule,
     ReactiveFormsModule,
+    MatNativeDateModule,
     RouterModule.forChild(routes)
   ]
 })

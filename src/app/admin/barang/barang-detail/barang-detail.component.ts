@@ -9,7 +9,6 @@ import { Barang } from '../barang.component';
   styleUrls: ['./barang-detail.component.scss']
 })
 export class BarangDetailComponent implements OnInit {
-  isEdit: boolean = false
   dialogTitle: string
   dialogOkButton: string
   barang: Barang
