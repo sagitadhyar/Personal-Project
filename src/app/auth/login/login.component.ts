@@ -15,7 +15,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  title = Constants.siteTitle
+  title = Constants.SITE_TITTLE
 
   constructor() { }
 

@@ -7,7 +7,7 @@ import { Constants } from 'src/app/utils/constants';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  adminMenus = Constants.adminMenus
+  adminMenus = Constants.LIST_ADMIN_MENU
   screenWidth: number
 
   constructor() { 

@@ -7,10 +7,10 @@ import { Constants } from 'src/app/utils/constants';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  title = Constants.siteTitle
+  title = Constants.SITE_TITTLE
   screenWidth: number
 
-  navList = Constants.adminMenus
+  navList = Constants.LIST_ADMIN_MENU
   constructor() {
     this.screenWidth = window.innerWidth;
     window.onresize = () => {

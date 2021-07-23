@@ -15,7 +15,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-  title = Constants.siteTitle
+  title = Constants.SITE_TITTLE
 
   constructor() { }
 

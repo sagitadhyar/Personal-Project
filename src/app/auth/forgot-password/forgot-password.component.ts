@@ -15,7 +15,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
-  title = Constants.siteTitle
+  title = Constants.SITE_TITTLE
 
   constructor() { }
 

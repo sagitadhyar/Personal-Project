@@ -1,12 +1,11 @@
 <div class="uk-height-viewport">  
-
-    <h1>BARANG</h1>
+    <h1>{{pageTitle}}</h1>
 
     <div class="uk-flex uk-flex-row uk-flex-bottom">
         <div class="uk-flex uk-width-1-1 uk-align-left">
             <button mat-flat-button color="primary" (click)="addData()">
                 <mat-icon>add</mat-icon>
-                Tambah Barang
+                {{buttonAddText}}
             </button>
         </div>
         <mat-form-field appearance="fill" class="uk-margin-left">
@@ -76,5 +75,11 @@
         </table>
     
         <mat-paginator #paginator [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+
+    <!-- Hidden button to add and delete dummy data -->
+    <div class="uk-margin-top">
+        <button mat-button class="uk-margin-left" (click)="addDummyData()" *ngIf='showDummyButton'>&nbsp;&nbsp;</button>
+        <button mat-button class="uk-margin-left" (click)="clearAllData()" *ngIf='showDummyButton'>&nbsp;&nbsp;</button>
     </div>
 </div>
