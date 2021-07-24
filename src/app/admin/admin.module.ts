@@ -10,6 +10,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PegawaiComponent } from './pegawai/pegawai.component';
 import { PegawaiDetailComponent } from './pegawai/pegawai-detail/pegawai-detail.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SupplierComponent } from './supplier/supplier.component';
+import { SupplierDetailComponent } from './supplier/supplier-detail/supplier-detail.component';
+import { PermintaanComponent } from './permintaan/permintaan.component';
+import { PermintaanDetailComponent } from './permintaan/permintaan-detail/permintaan-detail.component';
+import { PembelianComponent } from './pembelian/pembelian.component';
+import { PembelianDetailComponent } from './pembelian/pembelian-detail/pembelian-detail.component';
+import { PengirimanComponent } from './pengiriman/pengiriman.component';
+import { PengirimanDetailComponent } from './pengiriman/pengiriman-detail/pengiriman-detail.component';
 
 const routes: Routes = [
   {
@@ -29,6 +37,22 @@ const routes: Routes = [
         component: PegawaiComponent
       },
       {
+        path: 'supplier',
+        component: SupplierComponent
+      },
+      {
+        path: 'permintaan',
+        component: PermintaanComponent
+      },
+      {
+        path: 'pembelian',
+        component: PembelianComponent
+      },
+      {
+        path: 'pengiriman',
+        component: PengirimanComponent
+      },
+      {
         path:'',
         pathMatch:'full',
         redirectTo:'/admin/dashboard'
@@ -44,7 +68,15 @@ const routes: Routes = [
     BarangComponent,
     BarangDetailComponent,
     PegawaiComponent,
-    PegawaiDetailComponent
+    PegawaiDetailComponent,
+    SupplierComponent,
+    SupplierDetailComponent,
+    PermintaanComponent,
+    PermintaanDetailComponent,
+    PembelianComponent,
+    PembelianDetailComponent,
+    PengirimanComponent,
+    PengirimanDetailComponent
   ],
   imports: [
     CommonModule,

@@ -7,7 +7,7 @@ import { Constants } from 'src/app/utils/constants';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-  adminMenus = Constants.LIST_ADMIN_MENU
+  adminMenus = Constants.LIST_ADMIN_MENU.filter(e => !e.hideFromDashboard)
   screenWidth: number
 
   constructor() { 

@@ -7,29 +7,27 @@ import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog
 import { DialogContentComponent } from 'src/app/components/dialog-content/dialog-content.component';
 import { Constants } from 'src/app/utils/constants';
 import { LocalStorageHelper } from 'src/app/utils/local-storage-helper';
-import { PegawaiDetailComponent } from './pegawai-detail/pegawai-detail.component';
+import { PembelianDetailComponent } from './pembelian-detail/pembelian-detail.component';
 
-export interface Pegawai {
+export interface Pembelian {
+  faktur_pembelian: string;
+  nama_barang: string;
+  jumlah: number;
+  tanggal: Date;
+  supplier: string;
   nip: string;
-  nama_pegawai: string;
-  tempat_lahir: string;
-  tanggal_lahir: Date;
-  jenis_kelamin: string;
-  alamat: string;
-  jabatan: string;
-  no_handphone: string;
 }
 @Component({
-  selector: 'app-pegawai',
-  templateUrl: './pegawai.component.html',
-  styleUrls: ['./pegawai.component.scss']
+  selector: 'app-pembelian',
+  templateUrl: './pembelian.component.html',
+  styleUrls: ['./pembelian.component.scss']
 })
-export class PegawaiComponent implements AfterViewInit {
-  pageTitle: string = 'PEGAWAI'
-  buttonAddText: string = 'Tambah Data Pegawai'
-  localStorageItemName: string = 'pegawai'
-  displayedColumns: string[] = ['index', 'nip', 'nama_pegawai', 'jenis_kelamin', 'no_handphone', 'actions'];
-  dataSource: MatTableDataSource<Pegawai>
+export class PembelianComponent implements AfterViewInit {
+  pageTitle: string = 'HISTORY TRANSAKSI BARANG MASUK'
+  buttonAddText: string = 'Buat Transaksi Masuk'
+  localStorageItemName: string = 'pembelian'
+  displayedColumns: string[] = ['index', 'faktur_pembelian', 'nama_barang', 'jumlah', 'supplier', 'actions'];
+  dataSource: MatTableDataSource<Pembelian>
   showDummyButton: boolean = Constants.SHOW_DUMMY_BUTTON
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -55,24 +53,22 @@ export class PegawaiComponent implements AfterViewInit {
     }
   }
 
-  showDetail(row: Pegawai) {
+  showDetail(row: Pembelian) {
     this.dialog.open(DialogContentComponent, {
       width: '400px',
       data: [
-        { key: "NIP", value: row.nip },
-        { key: "Nama Pegawai", value: row.nama_pegawai },
-        { key: "Tempat Lahir", value: row.tempat_lahir },
-        { key: "Tanggal Lahir", value: row.tanggal_lahir },
-        { key: "Jenis Kelamin", value: row.jenis_kelamin },
-        { key: "Alamat", value: row.alamat },
-        { key: "Jabatan", value: row.jabatan },
-        { key: "No HP", value: row.no_handphone }
+        { key: "Faktur Pembelian", value: row.faktur_pembelian },
+        { key: "Nama Barang", value: row.nama_barang },
+        { key: "Jumlah", value: row.jumlah },
+        { key: "Tanggal", value: row.tanggal },
+        { key: "Supplier", value: row.supplier },
+        { key: "NIP", value: row.nip }
       ]
     })
   }
 
   addData() {
-    this.dialog.open(PegawaiDetailComponent, {
+    this.dialog.open(PembelianDetailComponent, {
       width: '400px'
     }).afterClosed().subscribe(result => {
       if(result) {
@@ -84,7 +80,7 @@ export class PegawaiComponent implements AfterViewInit {
   }
 
   editData(row: any) {
-    this.dialog.open(PegawaiDetailComponent, {
+    this.dialog.open(PembelianDetailComponent, {
       width: '400px',
       data: row
     }).afterClosed().subscribe(result => {
@@ -95,12 +91,12 @@ export class PegawaiComponent implements AfterViewInit {
     });
   }
 
-  deleteData(row: Pegawai) {
+  deleteData(row: Pembelian) {
     this.dialog.open(DialogConfirmComponent, {
       width: '400px',
       data: {
         title: "Anda yakin?",
-        text: `hapus data pegawai ${row.nip} - ${row.nama_pegawai} `
+        text: `hapus data transaksi masuk dengan faktur pembelian ${row.faktur_pembelian}`
       }
     }).afterClosed().subscribe(ok => {
       if(ok) {
@@ -125,17 +121,17 @@ export class PegawaiComponent implements AfterViewInit {
   }
 }
 
-// // /** Builds and returns a new Pegawai. */
-// const { DUMMY_NAMA_PEGAWAI_PREFIX, DUMMY_NAMA_PEGAWAI_SUFIX, DUMMY_KATEGORI, DUMMY_SATUAN } = Constants
-// function createDummyData(): Pegawai {
-//   const name = DUMMY_NAMA_PEGAWAI_PREFIX[Math.round(Math.random() * (DUMMY_NAMA_PEGAWAI_PREFIX.length - 1))] + ' ' + DUMMY_NAMA_PEGAWAI_SUFIX[Math.round(Math.random() * (DUMMY_NAMA_PEGAWAI_SUFIX.length - 1))]/*.charAt(0) + '.'*/;
+// // /** Builds and returns a new Pembelian. */
+// const { DUMMY_NAMA_PEMBELIAN_PREFIX, DUMMY_NAMA_PEMBELIAN_SUFIX, DUMMY_KATEGORI, DUMMY_SATUAN } = Constants
+// function createDummyData(): Pembelian {
+//   const name = DUMMY_NAMA_PEMBELIAN_PREFIX[Math.round(Math.random() * (DUMMY_NAMA_PEMBELIAN_PREFIX.length - 1))] + ' ' + DUMMY_NAMA_PEMBELIAN_SUFIX[Math.round(Math.random() * (DUMMY_NAMA_PEMBELIAN_SUFIX.length - 1))]/*.charAt(0) + '.'*/;
 //   const satuan = DUMMY_SATUAN[Math.round(Math.random() * (DUMMY_SATUAN.length - 1))] 
 //   const kategori = DUMMY_KATEGORI[Math.round(Math.random() * (DUMMY_KATEGORI.length - 1))] 
-//   const kode_pegawai = "000" + name.charAt(0).toUpperCase() + satuan.charAt(0).toUpperCase() + kategori.charAt(0) + Math.floor(Math.random()*(999-100+1)+100);
+//   const kode_pembelian = "000" + name.charAt(0).toUpperCase() + satuan.charAt(0).toUpperCase() + kategori.charAt(0) + Math.floor(Math.random()*(999-100+1)+100);
 
 //   return {
-//     kode_pegawai: kode_pegawai,
-//     nama_pegawai: name,
+//     kode_pembelian: kode_pembelian,
+//     nama_pembelian: name,
 //     satuan: satuan,
 //     kategori: kategori,
 //     stok: Math.round(Math.random() * 50),

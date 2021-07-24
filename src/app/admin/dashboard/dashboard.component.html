@@ -1,4 +1,4 @@
-<mat-grid-list [cols]="screenWidth > 1000 ? 4 : screenWidth > 800 ? 3 : 2" rowHeight="2:1" gutterSize="12" (window:resize)="onResize($event)">
+<mat-grid-list [cols]="screenWidth > 1000 ? 4 : screenWidth > 800 ? 3: screenWidth > 400 ? 2 : 1" rowHeight="2:1" gutterSize="12" (window:resize)="onResize($event)">
     <mat-grid-tile
       *ngFor="let menu of adminMenus"
       [colspan]="1"
