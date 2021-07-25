@@ -9,4 +9,8 @@ export class LocalStorageHelper {
         try { return JSON.parse(item) } 
         catch (error) { return {} }
     }
+
+    public static isLoggedIn() {
+        return localStorage.getItem("user")
+    }
 }

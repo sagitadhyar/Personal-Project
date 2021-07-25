@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { Constants } from 'src/app/utils/constants';
 
@@ -22,11 +22,15 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  loginForm = new FormGroup({
+    email: new FormControl('', [ Validators.required, Validators.email ]),
+    password: new FormControl('', [ Validators.required ]),
+  });
 
   matcher = new MyErrorStateMatcher();
 
+
+  onSubmit(){
+    alert('woi')
+  }
 }

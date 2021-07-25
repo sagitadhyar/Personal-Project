@@ -4,17 +4,17 @@
             <h2 class="app-title">{{title}}</h2>
         </mat-card-header>
         <mat-card-content class="uk-padding-small">
-            <form class="login-form uk-flex uk-flex-column uk-margin-top uk-padding uk-padding-remove-vertical">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form uk-flex uk-flex-column uk-margin-top uk-padding uk-padding-remove-vertical">
                 <!-- Input Email -->
                 <mat-form-field appearance="fill">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                    <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
                         placeholder="Ex. sagita@uad.ac.id">
                     <mat-hint>Masukan email anda</mat-hint>
-                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                    Please enter a valid email address
+                    <mat-error *ngIf="loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">
+                    Mohon masukan email yang valid
                     </mat-error>
-                    <mat-error *ngIf="emailFormControl.hasError('required')">
+                    <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
                     Email <strong>harus diisi</strong>
                     </mat-error>
                     <mat-icon matSuffix>email</mat-icon>
@@ -23,14 +23,20 @@
                 <!-- Input Password -->
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input type="password" matInput >
-                    <mat-hint>Masukan password anda</mat-hint>
+                    <input type="password" matInput formControlName="password">
+                    <mat-hint align="start">Masukan password anda</mat-hint>
+                    <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
+                        Password harus diisi
+                    </mat-error>
+                    <!-- <mat-error *ngIf="loginForm.controls['password'].hasError('minlength')">
+                        Panjang password minimum 8
+                    </mat-error> -->
                     <mat-icon matSuffix>lock</mat-icon>
                 </mat-form-field>
 
                 <p class="uk-flex uk-flex-right"><a routerLink="/forgot-password"><u>lupa password?</u></a></p>
 
-                <button mat-flat-button color="primary" class="uk-flex uk-flex-right">LOGIN</button>
+                <button mat-flat-button color="primary" type="submit" class="uk-flex uk-flex-right" [disabled]="!loginForm.valid">LOGIN</button>
 
                 <div class="uk-flex uk-flex-center uk-margin-top uk-inline">
                     <p>Belum punya akun?&nbsp;</p>
