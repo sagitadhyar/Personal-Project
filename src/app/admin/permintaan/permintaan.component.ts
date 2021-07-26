@@ -27,7 +27,7 @@ export class PermintaanComponent implements AfterViewInit {
   pageTitle: string = 'PERMINTAAN'
   buttonAddText: string = 'Tambah Data Permintaan'
   localStorageItemName: string = 'permintaan'
-  displayedColumns: string[] = ['index', 'faktur_permintaan', 'nama_barang', 'jumlah', 'tanggal_permintaan', 'status', 'actions'];
+  displayedColumns: string[] = ['index', 'faktur_permintaan', 'nama_barang', 'jumlah', 'status', 'actions'];
   dataSource: MatTableDataSource<Permintaan>
   showDummyButton: boolean = Constants.SHOW_DUMMY_BUTTON
 
@@ -74,6 +74,7 @@ export class PermintaanComponent implements AfterViewInit {
       width: '400px'
     }).afterClosed().subscribe(result => {
       if(result) {
+        result.status = "PENDING"
         this.dataSource.data.unshift(result)
         this.dataSource._updateChangeSubscription();
         LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
@@ -104,6 +105,22 @@ export class PermintaanComponent implements AfterViewInit {
       if(ok) {
         const index = this.dataSource.data.indexOf(row)
         this.dataSource.data.splice(index, 1)
+        this.dataSource._updateChangeSubscription()
+        LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
+      }
+    });
+  }
+
+  approveData(row: Permintaan) {
+    this.dialog.open(DialogConfirmComponent, {
+      width: '400px',
+      data: {
+        title: "Setujui permintaan?",
+        text: `Setujui permintaan dengan faktur ${row.faktur_permintaan}`
+      }
+    }).afterClosed().subscribe(ok => {
+      if(ok) {
+        row.status = "DISETUJUI"
         this.dataSource._updateChangeSubscription()
         LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
       }

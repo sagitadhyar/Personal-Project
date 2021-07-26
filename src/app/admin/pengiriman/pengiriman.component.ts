@@ -74,6 +74,7 @@ export class PengirimanComponent implements AfterViewInit {
       width: '400px'
     }).afterClosed().subscribe(result => {
       if(result) {
+        result.status = "PENDING"
         this.dataSource.data.unshift(result)
         this.dataSource._updateChangeSubscription();
         LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
@@ -104,6 +105,22 @@ export class PengirimanComponent implements AfterViewInit {
       if(ok) {
         const index = this.dataSource.data.indexOf(row)
         this.dataSource.data.splice(index, 1)
+        this.dataSource._updateChangeSubscription()
+        LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
+      }
+    });
+  }
+
+  sendData(row: Pengiriman) {
+    this.dialog.open(DialogConfirmComponent, {
+      width: '400px',
+      data: {
+        title: "Kirim Barang?",
+        text: `Kirim barang dengan faktur ${row.faktur_pengiriman}`
+      }
+    }).afterClosed().subscribe(ok => {
+      if(ok) {
+        row.status = "TERKIRIM"
         this.dataSource._updateChangeSubscription()
         LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
       }

@@ -62,7 +62,7 @@
 
         <div mat-dialog-actions class="uk-flex uk-flex-right">
             <button mat-button (click)="onCancel()">Batal</button>
-            <button mat-flat-button [disabled]="!item.faktur_pengiriman || !item.faktur_permintaan || !item.nama_barang || !item.jumlah_barang || !item.driver || !item.tanggal_kirim" [mat-dialog-close]="item" color="accent">{{dialogOkButton}}</button>
+            <button mat-flat-button [disabled]="!item.faktur_permintaan || !item.nama_barang || !item.jumlah || !item.store || !item.jabatan || !item.nip || !item.tanggal_permintaan" [mat-dialog-close]="item" color="accent">{{dialogOkButton}}</button>
         </div>
     </form>
 </div>
