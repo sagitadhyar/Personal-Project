@@ -3,7 +3,7 @@ import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog
 import { Constants } from 'src/app/utils/constants';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { AuthHelper } from 'src/app/utils/auth-helper';
+import { AuthHelper, User} from 'src/app/utils/auth-helper';
 
 @Component({
   selector: 'app-admin',
@@ -13,10 +13,12 @@ import { AuthHelper } from 'src/app/utils/auth-helper';
 export class AdminComponent implements OnInit {
   title = Constants.SITE_TITTLE
   screenWidth: number
+  userData: User
 
   navList = Constants.LIST_ADMIN_MENU
   constructor(public dialog:MatDialog, private router:Router) {
-    if(!AuthHelper.isLoggedIn()) this.router.navigateByUrl('/login')
+    this.userData = AuthHelper.isLoggedIn()
+    if(!this.userData) this.router.navigateByUrl('/login')
 
     this.screenWidth = window.innerWidth;
     window.onresize = () => {

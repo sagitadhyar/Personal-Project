@@ -35,7 +35,7 @@ export class AuthHelper {
         const users: Array<User> = this.getUsers()
         users.push(user)
 
-        // Simpan sessiaon
+        // Simpan session
         LocalStorageHelper.setObject("user", user)
         // Update data users
         LocalStorageHelper.setObject("users", users)
@@ -70,8 +70,8 @@ export class AuthHelper {
     }
 
 
-    public static isLoggedIn() {
-        return localStorage.getItem("user")
+    public static isLoggedIn() : User {
+        return LocalStorageHelper.getObject("user") as User
     }
     
 
