@@ -11,11 +11,22 @@ export class AuthHelper {
 
     public static login(email: string, pass: string){
         const users: Array<User> = this.getUsers()
-        const found = users.find(e => e.email === email)
+        const user = users.find(e => e.email === email)
 
-        if(!found) return
+        // Return false jika email tidak ditemukan
+        if(!user) return false
 
-        return found.password === this.hashPassword(pass)
+        // Return true jika password sesuai dan simpan session di localstorage
+        // Return false jika password tidak sesuai
+        if(user.password === this.hashPassword(pass)) {
+            LocalStorageHelper.setObject("user", user)
+            return true
+        }
+        return false
+    }
+    
+    public static logout(){
+        localStorage.removeItem("user")
     }
 
     public static signup(user: User){
@@ -23,6 +34,10 @@ export class AuthHelper {
 
         const users: Array<User> = this.getUsers()
         users.push(user)
+
+        // Simpan sessiaon
+        LocalStorageHelper.setObject("user", user)
+        // Update data users
         LocalStorageHelper.setObject("users", users)
     }
 
@@ -31,7 +46,7 @@ export class AuthHelper {
         const found = users.find(e => e.email === email)
         if(!found) return
         
-        // Update the password
+        // Update password
         found.password === this.hashPassword(newPassword)
         
         LocalStorageHelper.setObject("users", users)
@@ -39,10 +54,10 @@ export class AuthHelper {
 
     private static hashPassword(pass: string) {
         var hash = 0;
-        if (this.length == 0) {
-            return hash;
+        if (pass.length == 0) {
+            return "0";
         }
-        for (var i = 0; i < this.length; i++) {
+        for (var i = 0; i < pass.length; i++) {
             var char = pass.charCodeAt(i);
             hash = ((hash<<5)-hash)+char;
             hash = hash & hash; // Convert to 32bit integer

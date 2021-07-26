@@ -13,10 +13,10 @@
                         placeholder="Ex. sagita@uad.ac.id">
                     <mat-hint>Masukan email anda</mat-hint>
                     <mat-error *ngIf="loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">
-                    Mohon masukan email yang valid
+                        Mohon masukan email yang valid
                     </mat-error>
                     <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
-                    Email <strong>harus diisi</strong>
+                        Email <strong>harus diisi</strong>
                     </mat-error>
                     <mat-icon matSuffix>email</mat-icon>
                 </mat-form-field>

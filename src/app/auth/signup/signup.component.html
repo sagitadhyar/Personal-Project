@@ -3,38 +3,50 @@
         <mat-card-header class="uk-flex uk-flex-center uk-padding-small uk-padding-remove-horizontal uk-padding-remove-bottom">
             <h2 class="app-title">{{title}}</h2>
         </mat-card-header>
+        <mat-progress-bar [ngStyle]="{'visibility':isLoading==true ? 'visible' : 'hidden'}" mode="indeterminate"></mat-progress-bar>
         <mat-card-content class="uk-padding-small">
-            <form class="login-form uk-flex uk-flex-column uk-margin-top uk-padding uk-padding-remove-vertical">
-                
+            <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="login-form uk-flex uk-flex-column uk-margin-top uk-padding uk-padding-remove-vertical">
                 
                 <!-- Input Username -->
                 <mat-form-field appearance="fill">
                     <mat-label>Username</mat-label>
-                    <input type="text" matInput >
-                    <mat-hint></mat-hint>
+                    <input type="text" matInput formControlName="username" [errorStateMatcher]="matcher">
                     <mat-icon matSuffix>alternate_email</mat-icon>
+                    <mat-error *ngIf="signupForm.controls.username.hasError('minlength')">
+                        Panjang min 4 karakter
+                    </mat-error>
+                    <mat-error *ngIf="signupForm.controls.username.hasError('maxlength')">
+                        Panjang max 20 karakter
+                    </mat-error>
+                    <mat-error *ngIf="signupForm.controls.username.hasError('pattern')">
+                        Hanya boleh mengandung angka dan huruf
+                    </mat-error>
+                    <mat-error *ngIf="signupForm.controls.username.hasError('required')">
+                        Harus diisi
+                    </mat-error>
                 </mat-form-field>
 
-                
                 <!-- Input NIP -->
                 <mat-form-field appearance="fill">
                     <mat-label>Nomor Induk Pekerja</mat-label>
-                    <input type="text" matInput >
-                    <mat-hint></mat-hint>
+                    <input type="text" matInput formControlName="nip" >
                     <mat-icon matSuffix>account_box</mat-icon>
+                    <mat-error *ngIf="signupForm.controls.nip.hasError('required')">
+                        Harus diisi
+                    </mat-error>
                 </mat-form-field>
                 
                 <!-- Input Email -->
                 <mat-form-field appearance="fill">
                     <mat-label>Email</mat-label>
-                    <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+                    <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
                         placeholder="Ex. sagita@uad.ac.id">
                     <mat-hint></mat-hint>
-                    <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                    Please enter a valid email address
+                    <mat-error *ngIf="signupForm.controls.email.hasError('email') && !signupForm.controls.email.hasError('required')">
+                        Mohon masukan email yang valid
                     </mat-error>
-                    <mat-error *ngIf="emailFormControl.hasError('required')">
-                    Email <strong>harus diisi</strong>
+                    <mat-error *ngIf="signupForm.controls.email.hasError('required')">
+                        Email <strong>harus diisi</strong>
                     </mat-error>
                     <mat-icon matSuffix>email</mat-icon>
                 </mat-form-field>
@@ -42,20 +54,35 @@
                 <!-- Input Password -->
                 <mat-form-field appearance="fill">
                     <mat-label>Password</mat-label>
-                    <input type="password" matInput >
-                    <mat-hint></mat-hint>
+                    <input type="password" matInput formControlName="password" [type]="hide ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hide = !hide" type="button" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                     <mat-icon matSuffix>lock</mat-icon>
+                    <mat-error *ngIf="signupForm.controls.password.hasError('required')">
+                        Harus diisi
+                    </mat-error>
+                    <mat-error *ngIf="signupForm.controls.password.hasError('pattern')">
+                        Password min 8 karakter dan merupakan kombinasi huruf besar, kecil & angka
+                    </mat-error>
                 </mat-form-field>
                 
                 <!-- Input Confirm Password -->
                 <mat-form-field appearance="fill">
                     <mat-label>Konfirmasi Password</mat-label>
-                    <input type="password" matInput >
-                    <mat-hint></mat-hint>
+                    <input type="password" matInput formControlName="passwordConfirm" [type]="hideConfirm ? 'password' : 'text'">
+                    <button mat-icon-button matSuffix (click)="hideConfirm = !hideConfirm" type="button" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirm">
+                        <mat-icon>{{hideConfirm ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
                     <mat-icon matSuffix>lock</mat-icon>
+                    <mat-error *ngIf="signupForm.controls.passwordConfirm.hasError('required')">
+                        Harus diisi
+                    </mat-error>
                 </mat-form-field>
                 
-                <button mat-flat-button color="primary" class="uk-flex uk-flex-right">Sign Up</button>
+                <button mat-flat-button color="primary" type="submit" class="uk-flex uk-flex-right" [disabled]="!signupForm.valid">Sign Up</button>
+
+                <mat-error class="uk-width-1-1 uk-text-center uk-margin-top">&nbsp; {{errorMsg}} &nbsp;</mat-error>
 
                 <div class="uk-flex uk-flex-center uk-margin-top uk-inline">
                     <p>Sudah punya akun?&nbsp;</p>

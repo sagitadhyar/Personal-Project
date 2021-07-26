@@ -36,12 +36,12 @@ export class AdminComponent implements OnInit {
     this.dialog.open(DialogConfirmComponent, {
       width: '400px',
       data: {
-        title: "Keluar Aplikasi?",
+        title: "Anda yakin ingin keluar?",
       }
     }).afterClosed().subscribe(ok => {
       if(ok) {
-        localStorage.removeItem('user');
-        window.location.reload();
+        AuthHelper.logout()
+        window.location.reload()
       }
     });
   }
