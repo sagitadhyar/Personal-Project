@@ -2,8 +2,24 @@ mat-sidenav {
     width: 240px;
 }
 
-.app-title {
+.app-title, .username {
     font-family: 'OCR-B 10 BT';
     font-size: x-large;
     color: white;
+}
+
+.username {
+    font-family: 'OCR-B 10 BT';
+    font-size: 1rem;
+    color: white;
+}
+
+#circle {
+    width: 30px;
+    height: 30px;
+    font-size: 1rem;
+    background: #29B6F6;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
 }

@@ -6,7 +6,8 @@
             </button>
             <span class="app-title">&nbsp; {{title}}</span>
             <div class="uk-width-expand"></div>
-            <small>Admin</small>
+            <div id="circle" class="uk-text-center uk-text-middle">{{userData.username.charAt(0).toUpperCase()}}</div>&nbsp;
+            <small class="username">{{userData.username}}</small>&nbsp;
             <!-- <button mat-button (click)="logout()">Logout</button> -->
     
     </mat-toolbar>
