@@ -18,39 +18,48 @@ import { PembelianComponent } from './pembelian/pembelian.component';
 import { PembelianDetailComponent } from './pembelian/pembelian-detail/pembelian-detail.component';
 import { PengirimanComponent } from './pengiriman/pengiriman.component';
 import { PengirimanDetailComponent } from './pengiriman/pengiriman-detail/pengiriman-detail.component';
+import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'barang',
-        component: BarangComponent
+        component: BarangComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'pegawai',
-        component: PegawaiComponent
+        component: PegawaiComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'supplier',
-        component: SupplierComponent
+        component: SupplierComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'permintaan',
-        component: PermintaanComponent
+        component: PermintaanComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'pembelian',
-        component: PembelianComponent
+        component: PembelianComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'pengiriman',
-        component: PengirimanComponent
+        component: PengirimanComponent,
+        canActivate: [AuthGuard]
       },
       {
         path:'',
@@ -78,6 +87,7 @@ const routes: Routes = [
     PengirimanComponent,
     PengirimanDetailComponent
   ],
+  providers: [AuthGuard],
   imports: [
     CommonModule,
     MaterialDesign,

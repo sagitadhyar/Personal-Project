@@ -30,6 +30,22 @@ export class AuthHelper {
     }
 
     public static signup(user: User){
+        let errMessage = ""
+        const foundExistingData = this.getUsers().find(e => {
+            if(e.email === user.email) {
+                errMessage = "Email sudah terdaftar"
+                return true
+            } else if(e.nip === user.nip) {
+                errMessage = "NIP sudah terdaftar"
+                return true
+            } else if(e.username === user.username) {
+                errMessage = "Username sudah terdaftar"
+                return true
+            }
+            return false
+        })
+        if(foundExistingData) return errMessage
+
         user.password = this.hashPassword(user.password) as string
 
         const users: Array<User> = this.getUsers()
@@ -39,17 +55,25 @@ export class AuthHelper {
         LocalStorageHelper.setObject("user", user)
         // Update data users
         LocalStorageHelper.setObject("users", users)
+
+        // Return empty if success
+        return
     }
 
     public static changePassword(email: string, newPassword: string){
         const users: Array<User> = this.getUsers()
-        const found = users.find(e => e.email === email)
-        if(!found) return
+        const user = users.find(e => e.email === email)
+        if(!user) return false
         
         // Update password
-        found.password === this.hashPassword(newPassword)
+        user.password === this.hashPassword(newPassword)
         
+        // Simpan session
+        LocalStorageHelper.setObject("user", user)
+        // Update data users
         LocalStorageHelper.setObject("users", users)
+
+        return true
     }
 
     private static hashPassword(pass: string) {

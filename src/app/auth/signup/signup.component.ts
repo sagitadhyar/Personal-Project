@@ -51,7 +51,12 @@ export class SignupComponent implements OnInit {
     
     this.isLoading = false
 
-    AuthHelper.signup(user)
+    const error = AuthHelper.signup(user)
+
+    if(error) {
+      this.errorMsg = error as string
+      return
+    }
     
     this.router.navigateByUrl('/admin')
   }
