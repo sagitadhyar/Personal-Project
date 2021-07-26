@@ -3,7 +3,7 @@ import { DialogConfirmComponent } from 'src/app/components/dialog-confirm/dialog
 import { Constants } from 'src/app/utils/constants';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { LocalStorageHelper } from 'src/app/utils/local-storage-helper';
+import { AuthHelper } from 'src/app/utils/auth-helper';
 
 @Component({
   selector: 'app-admin',
@@ -16,7 +16,7 @@ export class AdminComponent implements OnInit {
 
   navList = Constants.LIST_ADMIN_MENU
   constructor(public dialog:MatDialog, private router:Router) {
-    if(!LocalStorageHelper.isLoggedIn()) this.router.navigateByUrl('/login')
+    if(!AuthHelper.isLoggedIn()) this.router.navigateByUrl('/login')
 
     this.screenWidth = window.innerWidth;
     window.onresize = () => {

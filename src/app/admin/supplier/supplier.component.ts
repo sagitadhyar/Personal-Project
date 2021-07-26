@@ -33,9 +33,9 @@ export class SupplierComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(public dialog:MatDialog) {
-    const data = LocalStorageHelper.getObject(this.localStorageItemName)
+    const data = LocalStorageHelper.getArrayObject(this.localStorageItemName)
     // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(data ? data : []);
+    this.dataSource = new MatTableDataSource(data);
   }
 
   ngAfterViewInit() {
