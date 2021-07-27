@@ -43,7 +43,7 @@ export class AdminComponent implements OnInit {
     }).afterClosed().subscribe(ok => {
       if(ok) {
         AuthHelper.logout()
-        window.location.reload()
+        this.router.navigateByUrl("/login")
       }
     });
   }

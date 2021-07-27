@@ -1,50 +1,38 @@
-<div class="uk-flex uk-flex-column">
-    <h1 mat-dialog-title>{{dialogTitle}}</h1>
+<h1 mat-dialog-title>{{dialogTitle}}</h1>
 
-    <form>
-        <div mat-dialog-content class="uk-flex uk-flex-column">
-            <mat-form-field appearance="fill">
-                <mat-label>Kode</mat-label>
-                <input matInput [(ngModel)]="item.kode" name="kode" required>
-                <mat-error *ngIf="!item.kode">Harus diisi</mat-error>
-            </mat-form-field>
-        </div>
+<div mat-dialog-content class="uk-flex uk-flex-column">
+    <mat-form-field appearance="fill">
+        <mat-label>Kode</mat-label>
+        <input matInput [(ngModel)]="item.kode" name="kode" required>
+        <mat-error *ngIf="!item.kode">Harus diisi</mat-error>
+    </mat-form-field>
 
-        <div mat-dialog-content class="uk-flex uk-flex-column">
-            <mat-form-field appearance="fill">
-                <mat-label>Nama Supplier</mat-label>
-                <input matInput [(ngModel)]="item.nama" name="nama" required>
-                <mat-error *ngIf="!item.nama">Harus diisi</mat-error>
-            </mat-form-field>
-        </div>
+    <mat-form-field appearance="fill">
+        <mat-label>Nama Supplier</mat-label>
+        <input matInput [(ngModel)]="item.nama" name="nama" required>
+        <mat-error *ngIf="!item.nama">Harus diisi</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Kategori</mat-label>
+        <input matInput [(ngModel)]="item.kategori" name="kategori" required>
+        <mat-error *ngIf="!item.kategori">Harus diisi</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Alamat</mat-label>
+        <input matInput type="text" [(ngModel)]="item.alamat" name="alamat" required>
+        <mat-error *ngIf="!item.alamat">Harus diisi</mat-error>
+    </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>No Telp</mat-label>
+        <input matInput type="tel" [(ngModel)]="item.no_telp" name="no_telp" ng-pattern="\+?([ -]?\d+)+|\(\d+\)([ -]\d+)" required>
+        <mat-error *ngIf="!item.no_telp">Harus diisi</mat-error>
+    </mat-form-field>
+</div>
 
-        <div mat-dialog-content class="uk-flex uk-flex-column">
-            <mat-form-field appearance="fill">
-                <mat-label>Kategori</mat-label>
-                <input matInput [(ngModel)]="item.kategori" name="kategori" required>
-                <mat-error *ngIf="!item.kategori">Harus diisi</mat-error>
-            </mat-form-field>
-        </div>
-
-        <div mat-dialog-content class="uk-flex uk-flex-column">
-            <mat-form-field appearance="fill">
-                <mat-label>Alamat</mat-label>
-                <input matInput type="text" [(ngModel)]="item.alamat" name="alamat" required>
-                <mat-error *ngIf="!item.alamat">Harus diisi</mat-error>
-            </mat-form-field>
-        </div>
-
-        <div mat-dialog-content class="uk-flex uk-flex-column">
-            <mat-form-field appearance="fill">
-                <mat-label>No Telp</mat-label>
-                <input matInput type="tel" [(ngModel)]="item.no_telp" name="no_telp" ng-pattern="\+?([ -]?\d+)+|\(\d+\)([ -]\d+)" required>
-                <mat-error *ngIf="!item.no_telp">Harus diisi</mat-error>
-            </mat-form-field>
-        </div>
-
-        <div mat-dialog-actions class="uk-flex uk-flex-right">
-            <button mat-button (click)="onCancel()">Batal</button>
-            <button mat-flat-button [disabled]="!item.kode || !item.nama || !item.kategori || !item.alamat || !item.no_telp" [mat-dialog-close]="item" color="accent">{{dialogOkButton}}</button>
-        </div>
-    </form>
+<div mat-dialog-actions class="uk-flex uk-flex-right">
+    <button mat-button (click)="onCancel()">Batal</button>
+    <button mat-flat-button [disabled]="!item.kode || !item.nama || !item.kategori || !item.alamat || !item.no_telp" [mat-dialog-close]="item" color="accent">{{dialogOkButton}}</button>
 </div>
