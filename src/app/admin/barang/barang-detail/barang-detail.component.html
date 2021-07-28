@@ -28,9 +28,16 @@
         <input matInput type="number" [(ngModel)]="barang.stok" name="stok" required>
         <mat-error *ngIf="!barang.stok">Harus diisi</mat-error>
     </mat-form-field>
+    
+    <mat-form-field appearance="fill">
+        <mat-label>Harga</mat-label>
+        <input matInput type="number" [(ngModel)]="barang.harga" name="harga" required>
+        <span matPrefix>Rp. &nbsp;</span>
+        <mat-error *ngIf="!barang.stok">Harus diisi</mat-error>
+    </mat-form-field>
 </div>
 
 <div mat-dialog-actions class="uk-flex uk-flex-right">
     <button mat-button (click)="onCancel()">Batal</button>
-    <button mat-flat-button [disabled]="!barang.kode_barang || !barang.nama_barang || !barang.stok" [mat-dialog-close]="barang" color="accent">{{dialogOkButton}}</button>
+    <button mat-flat-button [disabled]="!barang.kode_barang || !barang.nama_barang || !barang.stok || !barang.harga" [mat-dialog-close]="barang" color="accent">{{dialogOkButton}}</button>
 </div>

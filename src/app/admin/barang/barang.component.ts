@@ -15,6 +15,7 @@ export interface Barang {
   satuan: string;
   kategori: string;
   stok: number;
+  harga: number;
 }
 @Component({
   selector: 'app-barang',
@@ -25,7 +26,7 @@ export class BarangComponent implements AfterViewInit {
   pageTitle: string = 'BARANG'
   buttonAddText: string = 'Tambah Barang'
   localStorageItemName: string = 'barang'
-  displayedColumns: string[] = ['index', 'kode_barang', 'nama_barang', 'satuan', 'kategori', 'stok', 'actions'];
+  displayedColumns: string[] = ['index', 'kode_barang', 'nama_barang', 'satuan', 'kategori', 'stok', 'harga', 'actions'];
   dataSource: MatTableDataSource<Barang>
   showDummyButton: boolean = Constants.SHOW_DUMMY_BUTTON
 
@@ -61,6 +62,7 @@ export class BarangComponent implements AfterViewInit {
         { key: "Satuan", value: row.satuan },
         { key: "Kategori", value: row.kategori },
         { key: "Stok", value: row.stok.toString() },
+        { key: "Harga", value: "Rp. " + this.numberWithCommas(row.harga) }
       ]
     })
   }
@@ -117,6 +119,11 @@ export class BarangComponent implements AfterViewInit {
     this.dataSource._updateChangeSubscription()
     LocalStorageHelper.setObject(this.localStorageItemName, this.dataSource.data)
   }
+  
+  numberWithCommas(num: number) {
+    if(!num) return 0
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 }
 
 // /** Builds and returns a new Barang. */
@@ -133,5 +140,6 @@ function createDummyData(): Barang {
     satuan: satuan,
     kategori: kategori,
     stok: Math.round(Math.random() * 50),
+    harga: Math.round(Math.random() * 99999999),
   };
 }
