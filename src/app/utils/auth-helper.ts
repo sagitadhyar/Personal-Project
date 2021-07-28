@@ -62,11 +62,17 @@ export class AuthHelper {
 
     public static changePassword(email: string, newPassword: string){
         const users: Array<User> = this.getUsers()
-        const user = users.find(e => e.email === email)
+        const user = users.find(e => {
+            if(e.email === email) {
+                console.log("bef", e)
+                e.password = this.hashPassword(newPassword) as string
+                console.log("aft", e)
+                return true
+            }
+            return false
+        })
         if(!user) return false
-        
-        // Update password
-        user.password === this.hashPassword(newPassword)
+        console.log("ret", user)
         
         // Simpan session
         LocalStorageHelper.setObject("user", user)
