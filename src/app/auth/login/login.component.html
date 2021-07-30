@@ -1,17 +1,17 @@
-<div class="uk-flex uk-flex-middle uk-flex-center uk-height-viewport uk-padding" style="background-color: #E3DFDF;">  
+<div class="uk-flex uk-flex-middle uk-flex-center uk-height-viewport uk-padding-small" style="background-color: #E3DFDF;">  
     <mat-card class="uk-width-1-3@m uk-width-1-2@s uk-padding-remove">
         <mat-card-header class="uk-flex uk-flex-center uk-padding-small uk-padding-remove-horizontal uk-padding-remove-bottom">
             <h2 class="app-title">{{title}}</h2>
         </mat-card-header>
         <mat-progress-bar [ngStyle]="{'visibility':isLoading==true ? 'visible' : 'hidden'}" mode="indeterminate"></mat-progress-bar>
         <mat-card-content class="uk-padding-small">
-            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form uk-flex uk-flex-column uk-margin-top uk-padding uk-padding-remove-vertical">
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form uk-flex uk-flex-column ">
                 <!-- Input Email -->
                 <mat-form-field appearance="fill">
                     <mat-label>Email</mat-label>
                     <input type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
                         placeholder="Ex. sagita@uad.ac.id">
-                    <mat-hint>Masukan email anda</mat-hint>
+                    <mat-hint>Masukan email</mat-hint>
                     <mat-error *ngIf="loginForm.controls['email'].hasError('email') && !loginForm.controls['email'].hasError('required')">
                         Mohon masukan email yang valid
                     </mat-error>
@@ -28,7 +28,7 @@
                     <button mat-icon-button matSuffix (click)="hide = !hide" type="button" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
-                    <mat-hint>Masukan password anda</mat-hint>
+                    <mat-hint>Masukan password</mat-hint>
                     <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
                         Password harus diisi
                     </mat-error>
@@ -41,9 +41,9 @@
 
                 <button mat-flat-button color="primary" type="submit" class="uk-flex uk-flex-right" [disabled]="!loginForm.valid">LOGIN</button>
 
-                <mat-error class="uk-width-1-1 uk-text-center uk-margin-top">&nbsp; {{errorMsg}} &nbsp;</mat-error>
+                <mat-error class="uk-width-1-1 uk-text-center uk-margin-small-top">{{errorMsg}}</mat-error>
 
-                <div class="uk-flex uk-flex-center uk-margin-top uk-inline">
+                <div class="uk-flex uk-flex-center uk-margin-top uk-text-center uk-flex-column">
                     <p>Belum punya akun?&nbsp;</p>
                     <p><a routerLink="/signup"><u>Daftar sekarang</u></a></p>
                 </div>
