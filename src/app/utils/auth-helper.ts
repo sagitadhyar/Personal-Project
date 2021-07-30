@@ -9,7 +9,20 @@ export interface User {
 
 export class AuthHelper {
 
+    private static userDummy : User = {
+        username: "Customer",
+        nip: "123456",
+        email: "customer@gmail.com",
+        password: "Customer123"
+    }
+
     public static login(email: string, pass: string){
+        // Cek user dummy 
+        if(this.userDummy.email === email && this.userDummy.password === pass) {
+            LocalStorageHelper.setObject("user", this.userDummy)
+            return true
+        }
+
         const users: Array<User> = this.getUsers()
         const user = users.find(e => e.email === email)
 
